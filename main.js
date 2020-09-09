@@ -1,9 +1,10 @@
+"use strict";
 const score = document.querySelector('.score'),
     start = document.querySelector('.start'),
     gameArea = document.querySelector('.gameArea'),
     car = document.createElement('div');
 
-car.classList.add('çar');
+car.classList.add('car');
 
 start. addEventListener('click', startGame);
 document.addEventListener('keydown', startRun);
@@ -23,8 +24,8 @@ const setting = {
     traffic: 3
 };
 
-function getQuantityElements(heightElement) {
-    return document.documentElement.clientHeight / heightElement + 1;
+function getQuantityElements(heightElement) {  
+    return document.documentElement.clientHeight / heightElement + 1;    
 }
 
 function startGame() {
@@ -44,7 +45,7 @@ function startGame() {
         enemy.y = -100 * setting.traffic * (i + 1);
         enemy.style.left = Math.floor(Math.random() * (gameArea.offsetWidth - 50)) + 'px';
         enemy.style.top = enemy.y + 'px';
-        enemy.style.background = 'transparent url("./image/enemy2.png") center / cover no-repeat;';
+        enemy.style.background = 'transparent url(./image/enemy2.png) center / cover no-repeat';
         gameArea.appendChild(enemy);
     }
 
@@ -60,6 +61,7 @@ function playGame() {
     if(setting.start) {
         moveRoad();
         moveEnemy();
+   
         if(keys.ArrowLeft && setting.x > 0) {
             setting.x -= setting.speed;
         }
@@ -89,8 +91,8 @@ function stopRun(event) {
     keys[event.key] = false;
 }
 
-function moveRoad () {
-    let lines = document.querySelectorAll('line');
+function moveRoad() {
+    let lines = document.querySelectorAll('.line');
     lines.forEach(function(line) {
         line.y += setting.speed;
         line.style.top = line.y + 'px';
@@ -101,7 +103,7 @@ function moveRoad () {
 }
 
 function moveEnemy() {
-    let enemy = document.querySelectorAll('enemy');
+    let enemy = document.querySelectorAll('.enemy');
     enemy.forEach(function(item) {
         item.y += setting.speed / 2;
         item.style.top = item.y + 'px';
@@ -109,8 +111,7 @@ function moveEnemy() {
         if(item.y >= document.documentElement.clientHeight) {
             item.y = -100 * setting.traffic;
             item.style.left = Math.floor(Math.random() * (gameArea.offsetWidth - 50))+ 'px';
-        }
+        } 
+       
     });
-
-    
 }
